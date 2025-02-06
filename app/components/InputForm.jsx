@@ -1,11 +1,24 @@
 import { StyleSheet, Text, View, TextInput, Button } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 
-const InputForm = () => {
+const InputForm = ({ onAddTodo }) => {
+  const [todo, setTodo] = useState("");
+
+  const handleAddToDo = () => {
+    if (todo.trim()) {
+      onAddTodo(todo);
+      setTodo("");
+    }
+  };
   return (
     <View style={styles.container}>
-      <TextInput placeholder="Enter task" style={styles.textInput} />
-      <Button title="Add" />
+      <TextInput
+        value={todo}
+        placeholder="Enter task"
+        onChangeText={setTodo}
+        style={styles.textInput}
+      />
+      <Button onPress={handleAddToDo} title="Add" />
     </View>
   );
 };
@@ -24,6 +37,6 @@ const styles = StyleSheet.create({
     borderColor: "black",
     padding: 5,
     borderRadius: 5,
-    color: "white",
+    color: "black",
   },
 });
