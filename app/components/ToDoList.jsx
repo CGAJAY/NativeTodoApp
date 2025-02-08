@@ -4,22 +4,23 @@ import {
   View,
   FlatList,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import React from "react";
 
 // ToDoList component to display list of todos
-const ToDoList = ({ ToDos }) => {
+const ToDoList = ({ ToDos, onDeleteTodo, onEditTodo, onToggleTodo }) => {
 
   // function to render each todo item in the list 
   const renderItem = ({ item }) => (
     <View style={styles.container}>
-      <Text style={styles.renderText}>{item.name}</Text>
+      <Text style={[styles.renderText, item.completed && styles.completedText]} onPress={() => onToggleTodo(item.id)}>{item.name}</Text>
       <View style={styles.renderButton}>
-        <TouchableOpacity style={styles.editButton}>
-          <Text style={styles.buttonText}>Edit</Text>
+        <TouchableOpacity style={styles.editButton} onPress={() => onEditTodo(item.id)}>
+          <Text style={styles.buttonText} >Edit</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.deleteButton}>
-          <Text style={styles.buttonText}>Delete</Text>
+        <TouchableOpacity style={styles.deleteButton} onPress={() => onDeleteTodo(item.id)}>
+          <Text style={styles.buttonText} >Delete</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -47,14 +48,12 @@ const styles = StyleSheet.create({
     borderBottomColor: "black",
     padding: 10,
   },
-  text: {
-    color: "black",
-    fontSize: 16,
+  renderText: {
+    fontSize: 18,
   },
-  todoItem: {
-    padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
+  completedText: {
+    textDecorationLine: 'line-through',
+    color: '#888',
   },
   renderButton: {
     flexDirection: "row",
