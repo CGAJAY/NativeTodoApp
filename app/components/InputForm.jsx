@@ -1,12 +1,18 @@
 import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 import React, { useState } from "react";
 
+// input form component to add new todo
 const InputForm = ({ onAddTodo }) => {
+  // state to store todo
   const [todo, setTodo] = useState("");
 
+  // function to add todo
   const handleAddToDo = () => {
+    // check if todo is not empty
     if (todo.trim()) {
+      // call onAddTodo function from parent component and pass todo as argument 
       onAddTodo(todo);
+      // clear todo
       setTodo("");
     }
   };

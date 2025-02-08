@@ -7,7 +7,10 @@ import {
 } from "react-native";
 import React from "react";
 
+// ToDoList component to display list of todos
 const ToDoList = ({ ToDos }) => {
+
+  // function to render each todo item in the list 
   const renderItem = ({ item }) => (
     <View style={styles.container}>
       <Text style={styles.renderText}>{item.name}</Text>
@@ -23,8 +26,10 @@ const ToDoList = ({ ToDos }) => {
   );
   return (
     <FlatList
-      data={ToDos}
-      keyExtractor={(item) => item.id.toString()} // Ensure the key is a string
+      data={ToDos} // Pass the todos array to the FlatList
+      // Set the key for each item in the list to the id of the todo item 
+      keyExtractor={(item) => item.id.toString()} 
+      // Call the renderItem function for each item in the list 
       renderItem={renderItem}
     />
   );
